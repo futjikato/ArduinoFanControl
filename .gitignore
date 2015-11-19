@@ -1,0 +1,5 @@
+.vs
+FanControl/obj/*
+!FanControl/obj/.gitkeep
+FanControl/bin/*
+!FanControl/bin/.gitkeep

@@ -1,0 +1,82 @@
+﻿<Window x:Class="WpfApp.ControlWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="ControlWindow" Height="400" Width="400"
+        Closing="Window_Closing">
+    <Window.Resources>
+        <Style x:Key="headlineStyle" TargetType="Label">
+            <Setter Property="Background" Value="Orange" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Content="Fan Control" Style="{StaticResource headlineStyle}"/>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!-- FAN 1 -->
+            <Label Grid.Column="0" Grid.Row="0" Content="No.1"/>
+            <Label Grid.Column="1" Grid.Row="0" Content="{Binding Path=Pin1, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="0" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed1, Delay=500}" Margin="0,0,10,0"/>
+            <!-- FAN 2 -->
+            <Label Grid.Column="0" Grid.Row="1" Content="No.2"/>
+            <Label Grid.Column="1" Grid.Row="1" Content="{Binding Path=Pin2, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="1" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed2, Delay=500}" Margin="0,0,10,0"/>
+            <!-- FAN 3 -->
+            <Label Grid.Column="0" Grid.Row="2" Content="No.3"/>
+            <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=Pin3, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="2" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed3, Delay=500}" Margin="0,0,10,0"/>
+            <!-- FAN 4 -->
+            <Label Grid.Column="0" Grid.Row="3" Content="No.4"/>
+            <Label Grid.Column="1" Grid.Row="3" Content="{Binding Path=Pin4, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="3" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed4, Delay=500}" Margin="0,0,10,0"/>
+            <!-- FAN 5 -->
+            <Label Grid.Column="0" Grid.Row="4" Content="No.5"/>
+            <Label Grid.Column="1" Grid.Row="4" Content="{Binding Path=Pin5, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="4" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed5, Delay=500}" Margin="0,0,10,0"/>
+            <!-- FAN 6 -->
+            <Label Grid.Column="0" Grid.Row="5" Content="No.6"/>
+            <Label Grid.Column="1" Grid.Row="5" Content="{Binding Path=Pin6, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="5" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed6, Delay=500}" Margin="0,0,10,0"/>
+            <!-- FAN 7 -->
+            <Label Grid.Column="0" Grid.Row="6" Content="No.7"/>
+            <Label Grid.Column="1" Grid.Row="6" Content="{Binding Path=Pin7, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="6" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed7, Delay=500}" Margin="0,0,10,0"/>
+            <!-- FAN 8 -->
+            <Label Grid.Column="0" Grid.Row="7" Content="No.8"/>
+            <Label Grid.Column="1" Grid.Row="7" Content="{Binding Path=Pin8, FallbackValue=-, TargetNullValue=-}" ContentStringFormat="Pin {0}"/>
+            <Slider Grid.Column="2" Grid.Row="7" Minimum="0" Maximum="255" TickPlacement="BottomRight" Ticks="100,120,140,150,180,200,210,220,230,240,255" IsSnapToTickEnabled="True" Value="{Binding Path=Speed8, Delay=500}" Margin="0,0,10,0"/>
+            <!-- Bottomrow -->
+            <Button Grid.Column="2" Grid.Row="8" HorizontalAlignment="Right" Click="Button_Click" Content="Shut down all" Margin="0,0,15,0" Padding="10,0,10,0"/>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,47 @@
+﻿<Window x:Class="WpfApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp"
+        mc:Ignorable="d"
+        Title="Windsteuerung" Height="350" Width="525">
+    <Window.Resources>
+        <Style x:Key="headlineStyle" TargetType="Label">
+            <Setter Property="Background" Value="Orange" />
+            <Setter Property="FontStyle" Value="Italic" />
+            <Setter Property="Padding" Value="8,4" />
+            <Setter Property="Margin" Value="4" />
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" Content="Setup connection" Style="{StaticResource headlineStyle}"/>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Grid.Row="0" Content="USB Port" />
+            <Label Grid.Column="0" Grid.Row="1" Content="Baudrate" />
+            <ComboBox Name="UsbPortSelect" Grid.Column="1" Grid.Row="0" />
+            <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="{Binding Baudrate}"/>
+            <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Foreground="Red" Text="{Binding Path=ErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+            <Button Grid.Column="1" Grid.Row="3" Margin="5" Content="Connect" Click="OnConnectClick"/>
+        </Grid>
+    </Grid>
+</Window>
