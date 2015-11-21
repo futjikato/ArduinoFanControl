@@ -20,13 +20,13 @@ namespace WpfApp
     /// </summary>
     public partial class ControlWindow : Window
     {
-        private SerialController serialCntrl;
+        private ControllerInterface serialCntrl;
 
         private FanControlDO fanDataObject;
 
         private FanUdpServer udpServer;
 
-        public ControlWindow(SerialController controller)
+        public ControlWindow(ControllerInterface controller)
         {
             serialCntrl = controller;
             InitializeComponent();
@@ -34,7 +34,7 @@ namespace WpfApp
             fanDataObject = new FanControlDO(controller);
             this.DataContext = fanDataObject;
 
-            SerialController.ResponseCallback fanCallback = ListFans;
+            ResponseCallback fanCallback = ListFans;
             serialCntrl.Request(1, fanCallback);
 
             // start Udp server
@@ -47,7 +47,7 @@ namespace WpfApp
             udpServer.Stop();
         }
 
-        public void ListFans(SerialController.Response resp)
+        public void ListFans(Response resp)
         {
             int counter = 1;
             foreach (byte rByte in resp.answerBytes)

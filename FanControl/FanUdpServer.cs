@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WpfApp
@@ -13,31 +15,34 @@ namespace WpfApp
     {
         private const int UDP_PORT = 11099;
 
-        private System.Threading.Thread serverThread;
+        private Thread serverThread;
 
         private FanControlDO fanControlDataObject;
+
+        private UdpClient listener;
 
         public void Run(FanControlDO fanData)
         {
             fanControlDataObject = fanData;
-            serverThread = new System.Threading.Thread(serverLoop);
+            serverThread = new Thread(serverLoop);
             serverThread.Start();
         }
 
         public void Stop()
         {
-            serverThread.Abort();
+            Trace.WriteLine("Request server stop.");
+            listener.Close();
         }
 
         protected void serverLoop()
         {
             Trace.WriteLine("Waiting for UDP messages.");
-            UdpClient listener = new UdpClient(UDP_PORT);
-            listener.Client.ReceiveTimeout = 1000;
+            listener = new UdpClient(UDP_PORT);
             IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, UDP_PORT);
             byte[] receive_byte_array;
 
-            while (serverThread.IsAlive)
+            bool running = true;
+            while (running)
             {
                 try
                 {
@@ -53,21 +58,11 @@ namespace WpfApp
                     byte speed = receive_byte_array[1];
                     fanControlDataObject.setPinSpeed(fan, speed, true);
                 }
-                catch (SocketException e)
+                catch
                 {
-                    if(e.ErrorCode == 10060)
-                    {
-                        // timeout is ok
-                        continue;
-                    }
-                    else
-                    {
-                        throw e;
-                    }
+                    running = false;
                 }
             }
-
-            Trace.WriteLine("UDP server shut down!");
         }
     }
 }

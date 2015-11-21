@@ -38,7 +38,7 @@
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" Grid.Row="0" Content="USB Port" />
             <Label Grid.Column="0" Grid.Row="1" Content="Baudrate" />
-            <ComboBox Name="UsbPortSelect" Grid.Column="1" Grid.Row="0" />
+            <ComboBox Name="UsbPortSelect" Grid.Column="1" Grid.Row="0" SelectedIndex="0" />
             <TextBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="{Binding Baudrate}"/>
             <TextBlock Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Foreground="Red" Text="{Binding Path=ErrorMessage, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
             <Button Grid.Column="1" Grid.Row="3" Margin="5" Content="Connect" Click="OnConnectClick"/>

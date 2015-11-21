@@ -23,7 +23,7 @@ namespace WpfApp
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private bool hasSerialPorts = false;
+        const string MOCK_CNTRL_NAME = "Mock Controller";
 
         private string errorMessage;
         public string ErrorMessage
@@ -75,30 +75,32 @@ namespace WpfApp
 
             ObservableCollection<string> list = new ObservableCollection<string>();
 
+            list.Add(MOCK_CNTRL_NAME);
             foreach (string portName in System.IO.Ports.SerialPort.GetPortNames())
             {
-                hasSerialPorts = true;
                 list.Add(portName);
             }
             UsbPortSelect.ItemsSource = list;
-
-            if (!hasSerialPorts)
-            {
-                ErrorMessage = "No Serial Port found.\nPlease connect baord and restart app.";
-            }
         }
 
         public void OnConnectClick(object sender, RoutedEventArgs e)
         {
-            if (!hasSerialPorts)
-            {
-                return;
-            }
+            string selectedPort = UsbPortSelect.SelectedItem.ToString();
 
-            SerialController cntrl = new SerialController(UsbPortSelect.SelectedItem.ToString(), baudrate);
-            ControlWindow cntrlWindow = new ControlWindow(cntrl);
-            cntrlWindow.Show();
-            this.Close();
+            if (selectedPort == MOCK_CNTRL_NAME)
+            {
+                MockController cntrl = new MockController();
+                ControlWindow cntrlWindow = new ControlWindow(cntrl);
+                cntrlWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                SerialController cntrl = new SerialController(selectedPort, baudrate);
+                ControlWindow cntrlWindow = new ControlWindow(cntrl);
+                cntrlWindow.Show();
+                this.Close();
+            }
         }
     }
 }

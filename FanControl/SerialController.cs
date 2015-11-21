@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace WpfApp
 {
-    public class SerialController
+    public class SerialController : ControllerInterface
     {
         private SerialPort sPort;
 
         private readonly BackgroundWorker worker = new BackgroundWorker();
-
-        public delegate void ResponseCallback(Response resp);
 
         public const byte REQUEST_FANLIST = 1;
 
@@ -33,11 +31,6 @@ namespace WpfApp
             public ResponseCallback FinishCallback;
 
             public Response response;
-        }
-
-        public class Response
-        {
-            public byte[] answerBytes;
         }
 
         public SerialController(string PortName, int Baudrate)

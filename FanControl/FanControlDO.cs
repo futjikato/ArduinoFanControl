@@ -12,7 +12,7 @@ namespace WpfApp
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private SerialController serialCntrl;
+        private ControllerInterface serialCntrl;
 
         private Dictionary<int, byte> pinMap;
 
@@ -114,7 +114,7 @@ namespace WpfApp
             set { setPinSpeed(8, value, true); }
         }
 
-        public FanControlDO(SerialController cntrl)
+        public FanControlDO(ControllerInterface cntrl)
         {
             serialCntrl = cntrl;
             pinMap = new Dictionary<int, byte>();
@@ -151,7 +151,7 @@ namespace WpfApp
 
         private void updateFanSpeed(byte fan, byte speed)
         {
-            SerialController.ResponseCallback fanCallback = SpeedChangeCallback;
+            ResponseCallback fanCallback = SpeedChangeCallback;
             serialCntrl.Request(2, fanCallback, fan, speed);
         }
 
@@ -189,7 +189,7 @@ namespace WpfApp
             OnPropertyChanged(string.Format("Speed{0}", fan));
         }
 
-        public void SpeedChangeCallback(SerialController.Response resp)
+        public void SpeedChangeCallback(Response resp)
         {
             Trace.WriteLine("Speed change send.");
         }
