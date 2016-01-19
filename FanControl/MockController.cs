@@ -19,7 +19,7 @@ namespace WpfApp
 
             if (requestByte == 1)
             {
-                resp.answerBytes = new byte[] { 3, 5, 6, 9, 10, 11, 0 };
+                resp.answerBytes = new byte[] { 13, 12, 11, 10, 9, 8, 7, 6, 0 };
             }
             else
             {
